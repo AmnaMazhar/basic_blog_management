@@ -1,7 +1,9 @@
 # Basic Blog Management
 
-- This is Basic Blog Management Application.
+- This is Basic Blog Management Application with basic interface.
 - It has 3 roles admin, author, user.
+- User can register as admin, author or user.
+- User can login as admin, author or user
 - It has session management.
 
 ## Admin can
