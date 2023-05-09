@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8mb4" collation="utf8mb4_general_ci">blog_management</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="post" view="standard">
+<left>820</left>
+<top>40</top>
+<width>308</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `post` (
+  `post_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_role_id` int(11) NOT NULL,
+  `post_title` varchar(200) NOT NULL,
+  `post_description` text NOT NULL,
+  `is_active` enum('Active','Inactive') NOT NULL DEFAULT 'Active',
+  PRIMARY KEY (`post_id`),
+  KEY `user_role_id` (`user_role_id`),
+  CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_role_id`) REFERENCES `user_role` (`user_role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci</sql_create_table>
+</table>
+<table name="role" view="standard">
+<left>717</left>
+<top>241</top>
+<width>198</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `role` (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_type` varchar(20) NOT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci</sql_create_table>
+</table>
+<table name="user" view="standard">
+<left>64</left>
+<top>78</top>
+<width>237</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(200) NOT NULL,
+  `user_email` varchar(200) NOT NULL,
+  `user_password` varchar(200) NOT NULL,
+  `is_active` int(10) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_email` (`user_email`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci</sql_create_table>
+</table>
+<table name="user_role" view="standard">
+<left>402</left>
+<top>60</top>
+<width>222</width>
+<height>180</height>
+<sql_create_table>CREATE TABLE `user_role` (
+  `user_role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `is_active` int(11) DEFAULT 0,
+  `login_time` varchar(200) DEFAULT NULL,
+  `logout_time` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`user_role_id`),
+  KEY `user_id` (`user_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
